@@ -19,12 +19,12 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline
       <div class="meta">{p.categories.length > 0 && <ul class="tags">{p.categories.map((t) => <li><a href={`/blog/tag/${sl(t)}`}>{t}</a></li>)}</ul>}<time datetime={p.date}>{dshort(p.date)}</time></div>
       <h1>{p.title}</h1>
       
-      <div class="prose"><Parts parts={body} title={p.title} /></div>
+      <div class="prose"><Parts parts={body} title={p.title} blocks /></div>
       {p.tags.length > 0 && <ul class="tags tags--end">{p.tags.map((t) => <li><a href={`/blog/tag/${sl(t)}`}>{t}</a></li>)}</ul>}
     </div>
   </article>
   <nav class="post-nav" aria-label="Más entradas">
-    {next ? <a href={`/blog/${next.slug}`} rel="next"><span class="ch" aria-hidden="true">‹</span><span class="t3">{next.title}</span></a> : <span></span>}
-    {prev ? <a href={`/blog/${prev.slug}`} rel="prev"><span class="t3">{prev.title}</span><span class="ch" aria-hidden="true">›</span></a> : <span></span>}
+    {next ? <a href={`/blog/${next.slug}`} rel="next"><span class="ch" aria-hidden="true"><svg viewBox="0 0 9 16"><polyline fill="none" stroke-miterlimit="10" points="7.3,14.7 2.5,8 7.3,1.2" /></svg></span><span class="t3">{next.title}</span></a> : <span></span>}
+    {prev ? <a href={`/blog/${prev.slug}`} rel="prev"><span class="t3">{prev.title}</span><span class="ch" aria-hidden="true"><svg viewBox="0 0 9 16"><polyline fill="none" stroke-miterlimit="10" points="1.7,14.7 6.5,8 1.7,1.2" /></svg></span></a> : <span></span>}
   </nav>
 </Base>
