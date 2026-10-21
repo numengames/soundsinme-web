@@ -1,0 +1,22 @@
+---
+import Pic from './Pic.astro';
+import { find } from '../lib/img';
+import { md } from '../lib/md';
+interface Props { parts: any[]; sizes?: string; title?: string }
+const { parts, sizes = '(min-width:800px) 795px, 92vw', title = '' } = Astro.props;
+const isMd = (h: string) => !/^\s*</.test(h);
+const ok = (k: string) => { try { find(k); return true; } catch { return false; } };
+const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+{parts.map((p) => (
+  p.t === 'html' ? <Fragment set:html={isMd(p.html) ? md(p.html, title) : p.html} /> :
+  p.t === 'hr' ? <hr /> :
+  p.t === 'btn' ? <p><a class="btn" href={p.href}>{p.text}</a></p> :
+  p.t === 'img' && ok(p.src) ? <figure><Pic k={p.src} alt={p.alt} sizes={sizes} />{p.cap && <figcaption>{p.cap}</figcaption>}</figure> :
+  p.t === 'yt' ? (
+    <div class:list={["yt", p.id === "3RtI757nl-c" && "yt--short"]} data-yt={p.id} data-start={p.start || undefined} data-title={p.title || 'Vídeo'}>
+      {ok(ytThumb(p.id)) && <Pic k={ytThumb(p.id)} alt={p.title || 'Vídeo'} sizes={sizes} w={480} h={360} />}
+      <button type="button" aria-label={`Reproducir: ${p.title || 'vídeo'}`}></button>
+    </div>
+  ) : null
+))}

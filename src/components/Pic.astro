@@ -1,0 +1,13 @@
+---
+import { find, srcset, src, largest } from '../lib/img';
+interface Props { k: string; alt?: string; sizes?: string; eager?: boolean; class?: string; w?: number; h?: number; style?: string }
+const { k, alt = '', sizes = '100vw', eager = false, class: cls, w, h, style } = Astro.props;
+const e = find(k);
+const W = w ?? e.w, H = h ?? e.h;
+---
+<picture>
+  <source type="image/avif" srcset={srcset(e, 'avif')} sizes={sizes} />
+  <source type="image/webp" srcset={srcset(e, 'webp')} sizes={sizes} />
+  <img src={src(e, largest(e), 'webp')} width={W} height={H} alt={alt} class={cls} style={style}
+    decoding={eager ? 'sync' : 'async'} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+</picture>

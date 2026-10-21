@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import prods from '../data/products.json';
+---
+<Base title="Tienda — Cómic Notting Hill y más | Sounds In Me" description="Descarga el cómic «Notting Hill 2011» de Sounds In Me, en inglés y en español." path="/tienda" theme="white">
+  <section class="shop">
+    <h1>Tienda</h1>
+    <ul class="cats"><li><a href="/tienda">Music</a></li><li><a href="/tienda">Comic</a></li></ul>
+    <div class="grid2">
+      {prods.map((p, i) => (
+        <a class="prod" href={`/tienda/p/${p.slug}`}>
+          <Pic k={p.img} alt={p.title} sizes="(min-width:800px) 46vw, 46vw" w={1024} h={1024} eager={i === 0} />
+          <h2>{p.title}{p.onSale && <span class="tag-sale">Oferta</span>}</h2>
+          <p class="price">{p.onSale ? <><span>0,00 €</span><s>0,00 €</s></> : '0,00 €'}</p>
+          <span class="btn--blk">{p.button}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

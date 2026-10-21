@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Feed from './Feed.astro';
+import { all } from '../lib/posts';
+const { page = 1 } = Astro.props; const per = 20;
+const pages = Math.ceil(all.length / per);
+const items = all.slice((page - 1) * per, page * per);
+const path = page === 1 ? '/blog' : `/blog/page/${page}`;
+---
+<Base title={page === 1 ? 'Sounds stories — Blog de Sounds In Me' : `Sounds stories — Página ${page} | Sounds In Me`} description="Historias, entrevistas y artículos sobre música, hi-fi, memoria y sonido del proyecto Sounds In Me." path={path} current="blog" theme="dark"
+ ld={[{ '@context': 'https://schema.org', '@type': 'Blog', name: 'Sounds stories', url: 'https://www.soundsinme.com/blog', blogPost: items.slice(0, 10).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: `https://www.soundsinme.com/blog/${p.slug}`, datePublished: p.date })) }]}>
+  <section class="feed"><h1 class="sr">Sounds stories</h1><Feed posts={items} />
+    <nav class="pager" aria-label="Paginación">
+      {page > 1 ? <a href={page === 2 ? '/blog' : `/blog/page/${page - 1}`} rel="prev">‹ Publicaciones más recientes</a> : <span></span>}
+      {page < pages ? <a href={`/blog/page/${page + 1}`} rel="next">Publicaciones más antiguas ›</a> : <span></span>}
+    </nav>
+  </section>
+</Base>
