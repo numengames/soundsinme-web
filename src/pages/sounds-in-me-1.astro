@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import d from '../data/sounds-in-me-1.json';
+// source copy is the original's; semantic levels are re-assigned: one h1, the rest h2/p with the same visual classes
+const fx = (i: number) => d[i].html.replace(/<h1>/g, '<h2 class="t1">').replace(/<\/h1>/g, '</h2>').replace(/<h2>/g, '<h2 class="t2">').replace(/<h4>/g, '<p class="t4">').replace(/<\/h4>/g, '</p>');
+const imgs = d.filter((x) => x.t === 'img');
+const hero = d[0].html.match(/<h1>(.*?)<\/h1>/)[1], sub = d[0].html.match(/<h2>(.*?)<\/h2>/)[1];
+const w = (n: number) => `(min-width:1100px) ${n}px, 92vw`;
+---
+<Base title="La película de Sounds In Me — Un largometraje de ficción sobre música, memoria y duelo" description="Un largometraje de ficción creado con inteligencia artificial sobre la música, la memoria y aquello que creemos recordar. Descubre la sinopsis, el universo sonoro y el estado del desarrollo." path="/sounds-in-me-1" current="film"
+ ld={[{ '@context': 'https://schema.org', '@type': 'Movie', name: 'Sounds In Me', description: 'Largometraje de ficción en desarrollo sobre la música, la memoria y el duelo.', url: 'https://www.soundsinme.com/sounds-in-me-1', inLanguage: 'es' }]}>
+  <section class="sec sec--first hero--text sec--yellow"><div class="wrap stack"><div class="col-994 stack"><h1>{hero}</h1><p class="t2 gap3">{sub}</p></div></div></section>
+  <section class="sec sec--white"><div class="wrap stack"><Fragment set:html={fx(1)} /><Fragment set:html={fx(2)} /></div></section>
+  <section class="sec sec--yellow"><div class="wrap stack"><Fragment set:html={fx(3)} /><Pic k={imgs[0].src} alt="Un hombre al volante en una carretera junto al mar, imagen creada con IA para la película" sizes={w(1325)} /></div></section>
+  <section class="sec sec--white sec--hr"><div class="wrap stack"><div class="fig fig--q941"><Pic k={imgs[1].src} alt="Ficha de la película: largometraje de ficción, thriller psicológico, 90–100 minutos, realizada con IA" sizes={w(941)} /></div><hr class="rule" /></div></section>
+  <section class="sec sec--yellow"><div class="wrap stack"><Fragment set:html={fx(7)} /><Fragment set:html={fx(8)} /></div></section>
+  <section class="sec sec--white"><div class="wrap stack"><Fragment set:html={fx(9)} /><Fragment set:html={fx(10)} /></div></section>
+  <section class="sec sec--yellow sec--cast"><div class="wrap stack">
+    <div class="fig fig--q1024"><Pic k={imgs[2].src} alt="Pablo Jony, 48 años: reservado, irónico y de humor sutil" sizes={w(1024)} /></div>
+    <div class="fig fig--q941"><Pic k={imgs[3].src} alt="Samantha, 27 años, hija de Pablo Honey" sizes={w(941)} /></div>
+    <div class="fig fig--q1024"><Pic k={imgs[4].src} alt="Imagen del universo visual de la película" sizes={w(1024)} /></div><hr class="rule" /></div></section>
+  <section class="sec sec--white"><div class="wrap stack"><Fragment set:html={fx(14)} /><hr class="rule" /><div><a class="btn" href="/blog">Sigue el diario de producción</a></div><hr class="rule" /><div><a class="btn btn--l" href="/colabora">Colabora con SIM</a></div></div></section>
+  <section class="sec sec--yellow"><div class="wrap stack"><Fragment set:html={fx(19)} /><div><a class="btn btn--l" href="/colabora">Colabora con SIM</a></div></div></section>
+</Base>

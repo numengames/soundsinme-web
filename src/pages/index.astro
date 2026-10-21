@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import { find, src, largest } from '../lib/img';
+const hero = find('486d567b');
+const yt = find('maxresdefault');
+const full = '(min-width:1400px) 1400px, 92vw';
+---
+<Base
+  title="Sounds In Me — Un proyecto sobre la música, la memoria y el sonido"
+  description="Sounds In Me explora cómo la música se queda dentro de las personas: entrevistas, viajes e historias que hoy se convierten en un largometraje de ficción sobre la música, la memoria y el duelo."
+  path="/" current="home"
+  preload={[src(hero, 1280, 'avif')]}
+>
+  <section class="sec sec--first hero">
+    <div class="hero__bg"><Pic k="486d567b" alt="" sizes="100vw" eager /></div>
+    <div class="wrap">
+      <div class="hero__txt stack">
+        <h1>La música no solo se escucha.</h1>
+        <p class="t2"><em><mark>Se queda dentro.</mark></em></p>
+        <p class="hero__lead">Un proyecto sobre la música, la memoria y todo lo que el sonido deja en nosotros.</p>
+        <div class="hero__btns">
+          <a class="btn" href="/sounds-in-me-1">Descubre la película</a>
+          <a class="btn" href="#explora">Explora Sounds in Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--white">
+    <div class="wrap stack">
+      <h2 class="t3 uc">¿Qué es Sounds in Me?</h2>
+      <div class="stack">
+        <p class="txt">Sounds in Me es un proyecto que explora la relación entre la música y las personas: cómo la escuchamos, cómo nos une y cómo queda ligada a nuestros recuerdos.</p>
+        <p class="txt">A través de entrevistas, viajes e historias, hemos conocido distintas formas de vivir el sonido. Hoy, todo ese camino abre una nueva etapa: el desarrollo de un largometraje de ficción sobre la música, la memoria y el duelo.</p>
+      </div>
+      <div class="yt" data-yt="n_EAavHG4F4" data-title="Sounds In Me — vídeo del proyecto">
+        <Pic k="maxresdefault" alt="Vídeo de presentación de Sounds In Me" sizes={full} w={1280} h={720} />
+        <button type="button" aria-label="Reproducir vídeo de presentación"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--yellow">
+    <div class="wrap stack">
+      <h2 class="t1 uc">Del mundo real a la ficción</h2>
+      <div class="stack">
+        <p class="txt">Sounds in Me comenzó como un viaje para descubrir cómo las personas viven la música: entrevistas, lugares, historias y distintas maneras de escuchar y sentir el sonido.</p>
+        <p class="txt">Con el tiempo, todas aquellas experiencias despertaron una nueva idea: utilizar la ficción para hablar de la música, la memoria y el duelo desde un lugar más profundo.</p>
+        <p class="txt">Así nace la película de Sounds in Me, un largometraje actualmente en desarrollo.</p>
+      </div>
+      <div><a class="btn" href="/sounds-in-me-1">Descubre la película</a></div>
+      <Pic k="acc39fc8" alt="Magnetófono de cinta de bobina abierta en un estudio oscuro" sizes={full} />
+    </div>
+  </section>
+
+  <section class="sec sec--white" id="explora">
+    <div class="wrap stack">
+      <Pic k="unsplash-image-f3z" alt="Aguja de un tocadiscos sobre un vinilo" sizes={full} />
+      <h2 class="t2 uc">Explora Sounds in Me</h2>
+      <div class="rows">
+        <div><a class="btn btn--l btn--w" href="/blog">Sounds</a><p class="t4">tu blog y artículos musicales.</p></div>
+        <div><a class="btn btn--l btn--w" href="/conversation">In</a><p class="t4">viajes musicales y entrevistas.</p></div>
+        <div><a class="btn btn--l btn--w" href="/staff">Me</a><p class="t4">origen del proyecto y equipo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--yellow hero hero--cta">
+    <div class="hero__bg"><Pic k="72a54ae5" alt="" sizes="100vw" /></div>
+    <div class="wrap stack">
+      <p class="t1 cta"><span>Forma parte</span><span>de</span><span>Sounds</span><span>in</span><span>Me</span></p>
+      <div><a class="btn btn--l" href="/colabora">Colabora con SIM</a></div>
+    </div>
+  </section>
+</Base>

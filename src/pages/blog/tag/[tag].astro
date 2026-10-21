@@ -1,0 +1,10 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Feed from '../../../components/Feed.astro';
+import { tagMap } from '../../../lib/posts';
+export function getStaticPaths() { return [...tagMap].map(([k, v]) => ({ params: { tag: k }, props: v })); }
+const { name, posts } = Astro.props; const { tag } = Astro.params;
+---
+<Base title={`${name} — Sounds stories | Sounds In Me`} description={`Artículos de Sounds In Me sobre ${name}.`} path={`/blog/tag/${tag}`} current="blog" theme="dark" noindex={posts.length < 3}>
+  <section class="feed"><h1 class="t2" style="margin-bottom:60px">{name}</h1><Feed posts={posts} first={false} /></section>
+</Base>
