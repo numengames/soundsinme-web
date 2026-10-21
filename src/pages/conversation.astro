@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Parts from '../components/Parts.astro';
+import d from '../data/conversation.json';
+const title = d[0].html.replace(/<[^>]+>/g, '');
+const yts = d.filter((x) => x.t === 'yt');
+---
+<Base title="Viajes musicales y entrevistas — In | Sounds In Me" description="Viajes musicales y entrevistas de Sounds In Me: conversaciones con músicos, tiendas de discos, científicos del sonido y oyentes de todo el mundo." path="/conversation" current="in"
+ ld={[{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, url: 'https://www.soundsinme.com/conversation', hasPart: yts.slice(0, 20).map((v) => ({ '@type': 'VideoObject', name: (v.title || '').replace(/&#39;/g, "'"), embedUrl: `https://www.youtube.com/embed/${v.id}`, thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`, uploadDate: '2024-01-01' })) }]}>
+  <section class="sec sec--yellow conv-title"><div class="wrap col"><Fragment set:html={d[0].html.replace('<h2>', '<h2 class="t2">')} /></div></section>
+  <section class="sec sec--dark conv-body"><div class="col prose prose--y"><Parts parts={d.slice(1)} sizes="(min-width:1100px) 994px, 92vw" /></div></section>
+</Base>

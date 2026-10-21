@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import d from '../data/staff.json';
+const people: { name: string; img: string; role: string; text: string; ig?: string }[] = [];
+for (let i = 1; i < d.length; i += 2) {
+  const name = d[i].html.replace(/<[^>]+>/g, '').trim();
+  const lines = d[i + 1].cap.split('\n').map((s) => s.trim()).filter(Boolean);
+  const ig = lines.find((l) => l.startsWith('@'));
+  const [role, ...rest] = lines.filter((l) => !l.startsWith('@'));
+  people.push({ name, img: d[i + 1].src, role, text: rest.join(' '), ig });
+}
+---
+<Base title="Staff — El equipo de Sounds In Me" description="Conoce al equipo de Sounds In Me: Alejandro Traver, Pablo FM, Javi Franco, Bárbara Traver e Iker Fernández Milán." path="/staff" current="me"
+ preload={['/media/staff-poster-1280.avif']}>
+  <section class="sec sec--first sec--stafftitle"><div class="wrap col"><h1>Staff</h1></div></section>
+  <div class="video">
+      <video controls preload="none" playsinline poster="/media/staff-poster-1280.webp" width="1280" height="720">
+        <source src="/media/staff-av1.webm" type="video/webm; codecs=av01.0.05M.08,opus" />
+        <source src="/media/staff.mp4" type="video/mp4" />
+      </video>
+  </div>
+  <section class="sec sec--white sec--members"><div class="wrap">
+    {people.map((p, i) => (
+      <div class:list={['member', [2, 4].includes(i) && 'member--r']}>
+        <h2 class="t4">{p.name}</h2>
+        <div class="member__row">
+          <div class="member__img"><Pic k={p.img} alt={`${p.name}, ${p.role}`} sizes="(min-width:800px) 290px, 44vw" w={600} h={600} /></div>
+          <div class:list={['member__txt', i === 4 && 'big']}><p class="member__role t-role">{p.role}</p><p>{p.text}</p>{p.ig && <p><a class="btn btn--w" href={`https://www.instagram.com/${p.ig.slice(1)}`} rel="noopener">{p.ig}</a></p>}</div>
+        </div>
+      </div>
+    ))}
+  </div></section>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Pic from './Pic.astro';
+import { fmt, labels, slug, plain } from '../lib/posts';
+const { posts, first = true } = Astro.props;
+---
+<div class="feed__list">
+{posts.map((p, i) => (
+  <article class="entry">
+    <a class="entry__img" href={`/blog/${p.slug}`} tabindex="-1" aria-hidden="true">
+      {p.cover && <Pic k={p.cover} alt="" sizes="(min-width:800px) 46vw, 92vw" w={662} h={662} eager={first && i === 0} />}
+    </a>
+    <div class="entry__body">
+      {p.categories.length > 0 && <ul class="tags tags--top">{p.categories.map((t) => <li><a href={`/blog/tag/${slug(t)}`}>{t}</a></li>)}</ul>}
+      <time class="sr" datetime={p.date}>{fmt(p.date)}</time>
+      <h2><a href={`/blog/${p.slug}`}>{p.title}</a></h2>
+      {p.excerpt && <p>{p.excerpt}</p>}
+      <a class="more" href={`/blog/${p.slug}`}>Leer más<span class="sr"> sobre {p.title}</span></a>
+    </div>
+  </article>
+))}
+</div>

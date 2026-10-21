@@ -1,0 +1,93 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Pic from '../components/Pic.astro';
+interface Props {
+  title: string; description: string; path: string; current?: string;
+  image?: string; type?: 'website' | 'article'; ld?: object[]; noindex?: boolean; lang?: string;
+  preload?: string[]; published?: string; modified?: string; theme?: 'yellow' | 'dark' | 'white';
+}
+const { title, description, path, current = '', image = '/og.jpg', type = 'website', ld = [], noindex = false, lang = 'es', preload = [], published, modified, theme = 'yellow' } = Astro.props;
+const site = 'https://www.soundsinme.com';
+const url = site + (path === '/' ? '' : path);
+const img = image.startsWith('http') ? image : site + image;
+const nav = [
+  ['Home', '/', 'home'], ['Sounds', '/blog', 'blog'], ['In', '/conversation', 'in'],
+  ['Me', '/staff', 'me'], ['La película', '/sounds-in-me-1', 'film'], ['Colabora', '/colabora', 'colabora'],
+];
+const org = {
+  '@context': 'https://schema.org', '@type': 'Organization', '@id': site + '/#org', name: 'Sounds In Me', url: site,
+  logo: site + '/logo.png', email: 'admin@soundsinme.com',
+  sameAs: ['https://www.instagram.com/soundsinme', 'https://www.facebook.com/soundsinme', 'https://www.youtube.com/user/lacaja27'],
+};
+const web = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': site + '/#web', url: site, name: 'Sounds In Me', inLanguage: 'es-ES', publisher: { '@id': site + '/#org' } };
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+  <meta name="theme-color" content="#fffc52" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Sounds In Me — Sounds stories" href="/rss.xml" />
+  <meta property="og:site_name" content="Sounds In Me" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={url} />
+  <meta property="og:image" content={img} />
+  <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={img} />
+  {published && <meta property="article:published_time" content={published} />}
+  {modified && <meta property="article:modified_time" content={modified} />}
+  <link rel="preload" href="/fonts/poppins-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-300-italic.woff2" as="font" type="font/woff2" crossorigin />
+  {preload.map((h) => <link rel="preload" as="image" href={h} fetchpriority="high" />)}
+  <script type="application/ld+json" set:html={JSON.stringify([org, web, ...ld])} />
+</head>
+<body class={`t-${theme}`}>
+  <a class="skip" href="#page">Saltar al contenido</a>
+  <header class="hdr">
+    <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+    <a class="hdr__logo" href="/" aria-label="Sounds In Me — inicio">
+      <Pic k="4da038f5" alt="Sounds In Me" w={130} h={157} sizes="130px" eager />
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <ul>{nav.map(([t, h, k]) => <li><a href={h} aria-current={k === current ? 'page' : undefined}>{t}</a></li>)}</ul>
+    </nav>
+  </header>
+  <div class="menu" id="menu" role="dialog" aria-label="Menú" aria-modal="true">
+    <nav aria-label="Móvil"><ul>{nav.map(([t, h, k]) => <li><a href={h} aria-current={k === current ? 'page' : undefined}>{t}</a></li>)}</ul></nav>
+  </div>
+  <main id="page"><slot /></main>
+  <footer class="ftr">
+    <a class="u" href="https://www.instagram.com/soundsinme" rel="noopener me">@soundsinme</a>
+    <div class="soc">
+      <a href="https://www.facebook.com/soundsinme" rel="noopener me" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8z"/></svg></a>
+      <a href="https://www.instagram.com/soundsinme" rel="noopener me" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.4A4.6 4.6 0 1 0 12 16.6 4.6 4.6 0 0 0 12 7.4zm0 7.6a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5-7.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 3.5c-2.4 0-2.7 0-3.7.1-3 .1-4.5 1.7-4.6 4.6C3.6 9.3 3.5 9.6 3.5 12s0 2.7.1 3.7c.1 2.9 1.6 4.5 4.6 4.6 1 .1 1.300.1 3.700.1s2.700 0 3.700-.1c2.900-.1 4.500-1.700 4.600-4.600.1-1 .1-1.300.1-3.700s0-2.700-.1-3.700c-.1-2.900-1.600-4.500-4.600-4.600-1-.1-1.300-.1-3.700-.1zm0 1.600c2.400 0 2.700 0 3.600.1 2.200.1 3.200 1.100 3.300 3.300.1.900.1 1.200.1 3.500s0 2.600-.1 3.500c-.1 2.200-1.100 3.200-3.300 3.300-.9.1-1.200.1-3.600.1s-2.700 0-3.500-.1c-2.200-.1-3.200-1.100-3.300-3.300-.1-.9-.1-1.200-.1-3.500s0-2.600.1-3.500C5.300 6.300 6.300 5.300 8.500 5.200c.9-.1 1.100-.1 3.500-.1z"/></svg></a>
+      <a href="https://www.youtube.com/user/lacaja27" rel="noopener me" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.600 7.200a2.500 2.500 0 0 0-1.800-1.800C18.200 5 12 5 12 5s-6.200 0-7.800.4A2.500 2.500 0 0 0 2.400 7.200C2 8.800 2 12 2 12s0 3.200.4 4.800a2.500 2.500 0 0 0 1.800 1.800C5.800 19 12 19 12 19s6.200 0 7.800-.4a2.500 2.500 0 0 0 1.800-1.800c.4-1.600.4-4.800.4-4.800s0-3.200-.4-4.800zM10 15V9l5.200 3z"/></svg></a>
+      <a href="https://discord.com/channels/1026546584059650089/1026546584734945323" rel="noopener me" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.300 5.300A16 16 0 0 0 15.300 4l-.5 1a14.800 14.800 0 0 0-5.600 0l-.5-1a16 16 0 0 0-4 1.300C2.100 9.100 1.400 12.800 1.700 16.400a16.200 16.200 0 0 0 4.900 2.500l1-1.700a10.500 10.500 0 0 1-1.600-.8l.4-.3a11.600 11.600 0 0 0 10.200 0l.4.300c-.5.300-1 .6-1.600.8l1 1.700a16.200 16.200 0 0 0 4.900-2.500c.4-4.200-.7-7.900-3-11.100zM8.700 14.200c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg></a>
+      <a href="https://oncyber.io/sounds_in_me" rel="noopener" aria-label="Metaverso (Oncyber)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.600 13.400a1 1 0 0 1 0-1.400l3.500-3.500a3 3 0 0 1 4.200 4.200l-1.800 1.800-1.400-1.400 1.800-1.800a1 1 0 0 0-1.400-1.400L12 13.400a1 1 0 0 1-1.400 0zm2.800-2.800a1 1 0 0 1 0 1.400L9.900 15.500a3 3 0 0 1-4.200-4.200l1.800-1.800 1.400 1.400-1.800 1.800a1 1 0 0 0 1.400 1.400L12 10.600a1 1 0 0 1 1.400 0z"/></svg></a>
+    </div>
+    <a class="u" href="mailto:admin@soundsinme.com">admin@soundsinme.com</a>
+  </footer>
+  <script is:inline>
+    (function(){
+      var b=document.querySelector('.burger'),m=document.getElementById('menu');
+      if(b)b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');m.classList.toggle('is-open',o);document.body.classList.toggle('menu-open',o)});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&b&&b.getAttribute('aria-expanded')==='true')b.click()});
+      document.querySelectorAll('.yt[data-yt]').forEach(function(el){var btn=el.querySelector('button');if(!btn)return;btn.addEventListener('click',function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+el.dataset.yt+'?autoplay=1'+(el.dataset.start?'&start='+el.dataset.start:'');f.title=el.dataset.title||'Vídeo';f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';f.allowFullscreen=true;el.appendChild(f);btn.remove()})});
+    })();
+  </script>
+</body>
+</html>

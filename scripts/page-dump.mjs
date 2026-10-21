@@ -1,0 +1,10 @@
+import fs from 'fs'; import * as cheerio from 'cheerio';
+const f=process.argv[2]; const $=cheerio.load(fs.readFileSync('../soundsinme-ref/'+f,'utf8'));
+$('style,script,svg').remove();
+const main=$('main');
+main.find('.sqs-block').each((_,b)=>{const $b=$(b); if($b.parents('.sqs-block').length) return;
+ const cls=($b.attr('class')||'').replace(/sqs-block|website-component-block|sqs-block-website-component/g,'').trim().slice(0,40);
+ const t=$b.text().replace(/\s+/g,' ').trim().slice(0,70);
+ const im=$b.find('img').first(); const src=(im.attr('data-src')||im.attr('src')||'').split('/').slice(-1)[0].slice(0,35);
+ const yt=($b.html().match(/youtube\.com\/(?:embed|watch)[^"&\\ ]*/)||[''])[0];
+ console.log($b.closest('section').attr('data-section-id')?.slice(-4)||'-', '|',cls,'|',t,'|',src,'|',yt);});

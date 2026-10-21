@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Pic from '../../../components/Pic.astro';
+import prods from '../../../data/products.json';
+export function getStaticPaths() { return prods.map((p) => ({ params: { slug: p.slug }, props: { p } })); }
+const { p } = Astro.props;
+const text = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+---
+<Base title={`${p.title} | Sounds In Me`} description={text.slice(0, 158)} path={`/tienda/p/${p.slug}`} theme="white"
+ ld={[{ '@context': 'https://schema.org', '@type': 'Product', name: p.title, description: text.slice(0, 300), offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' } }]}>
+  <section class="shop pdp">
+    <div class="grid2"><Pic k={p.img} alt={p.title} sizes="(min-width:800px) 480px, 92vw" w={1024} h={1024} eager />
+      <div class="prose"><h1>{p.title}</h1><p class="price">0,00 €</p><Fragment set:html={p.html} /></div></div>
+  </section>
+</Base>

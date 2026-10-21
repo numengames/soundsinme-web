@@ -1,0 +1,56 @@
+[
+ {
+  "t": "html",
+  "html": "<h1>Staff</h1>"
+ },
+ {
+  "t": "html",
+  "html": "<h4>Alejandro Traver</h4>"
+ },
+ {
+  "t": "img",
+  "src": "https://images.squarespace-cdn.com/content/v1/63387d45eaea027a44c937ac/4c972139-fa42-4e55-8d28-2fde8b0da75c/F12F60FA-B9FA-4C9A-95E1-A478CBBEB697.JPG",
+  "alt": "",
+  "cap": "EL MENSAJERO\n        \n\n        \n          Hace lo que dice. No entiende de imposibles. Un loco perdido. Dice que quiere hacer una película. Está perdido, pero ahí sigue."
+ },
+ {
+  "t": "html",
+  "html": "<h4>Pablo FM </h4>"
+ },
+ {
+  "t": "img",
+  "src": "https://images.squarespace-cdn.com/content/v1/63387d45eaea027a44c937ac/12c701d6-62a0-4a25-a458-06ca01517911/0A21CE39-D313-47BF-9472-4D2CC3812E9E.JPG",
+  "alt": "",
+  "cap": "EL QUE SE DEJA LIAR\n        \n\n        \n          Vive en Madrid, España, con su familia y cuenta con una larga trayectoria en proyectos que abarcan desde el sector audiovisual hasta las startups, incluyendo un estudio de música. Está muy metido en el metaverso. Le encantan los kebabs."
+ },
+ {
+  "t": "html",
+  "html": "<h4>Javi Franco</h4>"
+ },
+ {
+  "t": "img",
+  "src": "https://images.squarespace-cdn.com/content/v1/63387d45eaea027a44c937ac/9df71ee9-c992-496d-a2bf-f29a98db4786/1AD89740-C1F4-4EDC-8C25-200A328D9DB9.JPG",
+  "alt": "",
+  "cap": "EL VIP\n        \n\n        \n          Él es el VIP. También vive en Madrid y es nuestro responsable de la web. Sin él no habríamos llegado tan lejos. Es un punk y un técnico de primera en asuntos sin importancia."
+ },
+ {
+  "t": "html",
+  "html": "<h4>Bárbara Traver  </h4>"
+ },
+ {
+  "t": "img",
+  "src": "https://images.squarespace-cdn.com/content/v1/63387d45eaea027a44c937ac/3b13db8d-22cd-4b5f-a676-4631e8bba15d/F9E7DCA5-1245-4AD4-BBCB-4D6BDFD1C111.JPG",
+  "alt": "",
+  "cap": "LA SECUESTRADA\n        \n\n        \n          Es una trotamundos. Un día está en Alcora y al siguiente, en Londres. Es nuestra directora de arte. Cuenta con diez años de experiencia en fotografía y vídeo, además de numerosas exposiciones y premios a sus espaldas. Cada dos años atraviesa una crisis de identidad.\n        \n\n        \n          \n            \n              \n                \n                  @barbaratraver_"
+ },
+ {
+  "t": "html",
+  "html": "<h4>Iker Fernández Milán </h4>"
+ },
+ {
+  "t": "img",
+  "src": "https://images.squarespace-cdn.com/content/v1/63387d45eaea027a44c937ac/9c8305c1-b92d-4879-be6d-d958847737b4/7A8527CE-FD5C-40B9-94F9-776E011BC7FC.JPG",
+  "alt": "",
+  "cap": "El Profe\n        \n\n        \n          De niño se cayó en la marmita de la perfección: si hay un defecto, lo ve; si a la sopa le falta sal, lo dice; si algo no le gusta, lo escupe. No tiene filtros y te lo dice tal cual. Así es él.Sounds in Me es fotógrafo profesional. Está ahí para recordarnos que hay que encuadrar bien, que la iluminación falla y que las prisas nos matan. Sin él, esto no funcionaría."
+ }
+]
