@@ -2,13 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
 import d from '../data/staff.json';
-const people: { name: string; img: string; role: string; text: string; ig?: string }[] = [];
+const people: { name: string; img: string; role: string; text: string[]; ig?: string }[] = [];
 for (let i = 1; i < d.length; i += 2) {
   const name = d[i].html.replace(/<[^>]+>/g, '').trim();
   const lines = d[i + 1].cap.split('\n').map((s) => s.trim()).filter(Boolean);
   const ig = lines.find((l) => l.startsWith('@'));
   const [role, ...rest] = lines.filter((l) => !l.startsWith('@'));
-  people.push({ name, img: d[i + 1].src, role, text: rest.join(' '), ig });
+  people.push({ name, img: d[i + 1].src, role, text: rest, ig });
 }
 ---
 <Base title="Staff — El equipo de Sounds In Me" description="Conoce al equipo de Sounds In Me: Alejandro Traver, Pablo FM, Javi Franco, Bárbara Traver e Iker Fernández Milán." path="/staff" current="me"
@@ -25,8 +25,8 @@ for (let i = 1; i < d.length; i += 2) {
       <div class:list={['member', [2, 4].includes(i) && 'member--r']}>
         <h2 class="t4">{p.name}</h2>
         <div class="member__row">
-          <div class="member__img"><Pic k={p.img} alt={`${p.name}, ${p.role}`} sizes="(min-width:800px) 290px, 44vw" w={600} h={600} /></div>
-          <div class:list={['member__txt', i === 4 && 'big']}><p class="member__role t-role">{p.role}</p><p>{p.text}</p>{p.ig && <p><a class="btn btn--w" href={`https://www.instagram.com/${p.ig.slice(1)}`} rel="noopener">{p.ig}</a></p>}</div>
+          <div class="member__img"><Pic k={p.img} alt={`${p.name}, ${p.role}`} sizes="(min-width:768px) 22vw, 40vw" w={600} h={600} /></div>
+          <div class:list={['member__txt', [1, 2, 3].includes(i) && 'sm']}><p class="member__role">{p.role}</p>{p.text.map((t) => <p>{t}</p>)}{p.ig && <a class="btn btn--w" href={`https://www.instagram.com/${p.ig.slice(1)}`} rel="noopener">{p.ig}</a>}</div>
         </div>
       </div>
     ))}

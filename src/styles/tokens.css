@@ -10,6 +10,7 @@
   --bp0:17px;
   --cw:max(29.7px, 3.3vw);
   --cw-hero:max(59.4px, 6.6vw);
+  --fe-row:24px;                               /* fluid-engine grid row (11px gaps) */
 }
 @media (min-width:768px){
 :root{
@@ -23,6 +24,7 @@
   --fs-body:var(--fs-btn);
   --logo-w:129.7px; --logo-h:157px;
   --bp0:0px;
+  --fe-row:calc(min(92vw, 1400px) * .0215);
 }
 }
 @media (min-width:800px){:root{--hdr-py:1.6vw}}
