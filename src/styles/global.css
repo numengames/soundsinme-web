@@ -211,32 +211,39 @@ body.t-white{background:#fff}
 .yt--short{aspect-ratio:9/16;max-width:min(100%,560px);margin-inline:auto}
 
 /* ---------- blog feed ---------- */
-.feed{padding:calc(var(--hdr-h) + 58px) var(--px) 90px}
-.entry{display:grid;gap:34px;align-items:center}
-.entry+.entry{margin-top:130px}.entry:first-child{margin-bottom:-15px}
-.entry__img{display:block}
-.entry__img picture,.entry__img img{width:100%;aspect-ratio:1;object-fit:cover}
-.entry__body{display:grid;gap:1.2em;align-content:center;max-width:596px;padding-block:34px 1px}
-.tags--top{margin:-30px 0 -2px}
-.entry__body>*{max-width:70%}
-.entry h2{font-size:var(--fs-h2);line-height:1.46}
-.entry h2 a{text-decoration:none;overflow-wrap:anywhere}
-.entry p{font-size:var(--fs-body);line-height:1.87}
-.entry time{font-size:calc(var(--fs-body) * .78);font-weight:500;letter-spacing:.02em}
+/* Squarespace "alternating side by side" list: 4vw list padding, 130px between entries, image 50% + 5% gap,
+   summary 45% with the text in its left 70% */
+.feed{padding:calc(var(--hdr-h) + 4vw) var(--gut) 6vw}
+.entry{margin-bottom:130px}
+.entry__img{display:block;position:relative;padding-bottom:calc(100% + 1px);margin-bottom:5vw}
+.entry__img picture,.entry__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.entry__txt{width:70%;display:flex;flex-direction:column;font-size:var(--fs-body);line-height:1.87}  /* flex: margins add up, as in the original */
+.entry__meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:2vw}
+.entry__cats{display:block}
+.entry__meta a,.entry__meta time{font-weight:500;line-height:1.04;text-decoration:none}
+.entry__meta time{display:block}
+.entry h2{font-size:var(--fs-h2);line-height:1.46;margin:0 0 5px}
+.entry h2 a{text-decoration:none}
+.entry__ex{display:flow-root}.entry__ex p{margin-block:var(--rem);white-space:pre-wrap}
+.entry__ex p:empty::after{content:'\200b'}
+.sqsrte-small{font-size:15.784px}@media (min-width:768px){.sqsrte-small{font-size:calc(var(--rem) * .98)}}  /* Squarespace keeps empty paragraphs as blank lines */
+.more{align-self:flex-start;margin-top:2vw;padding-bottom:1px;text-decoration:none}
+@media (min-width:768px){
+  .entry{display:flex;align-items:center}
+  .entry__img{flex:none;width:50%;padding-bottom:calc(50% + 1px);margin:0 5% 0 0}
+  .entry:nth-child(even){flex-direction:row-reverse}.entry:nth-child(even) .entry__img{margin:0 0 0 5%}
+  .entry__body{width:45%}
+  .entry__meta{margin-bottom:15px}.more{margin-top:5px}
+}
 .tags li+li::before{content:'•';padding:0 .5em}
 .tags{display:flex;flex-wrap:wrap;gap:10px 0;list-style:none;margin:0;padding:0;font-weight:500;font-size:var(--fs-body);line-height:1.04}
 .tags a{text-decoration:none}
-.more{text-decoration:none;justify-self:start;font-size:var(--fs-body);line-height:1.87}
-@media (min-width:800px){
-  .entry{grid-template-columns:1.1115fr 1fr;gap:66px}
-  .entry:nth-child(even){grid-template-columns:1fr 1.1115fr}
-  .entry:nth-child(even) .entry__img{order:2}
-  .entry__body>*{max-width:70%}
-}
-@media (max-width:799px){.entry{gap:20px}.entry__body{padding-top:25px}.tags--top{margin-top:-22px}.entry+.entry{margin-top:115px}.feed{padding-top:calc(var(--hdr-h) + 15px)}.prod h2{font-size:17px;line-height:1.4}.grid2{gap:30px}}
-.pager{display:flex;justify-content:space-between;gap:34px;padding-top:112px;flex-wrap:wrap}
-.pager a{text-decoration:none;font-size:var(--fs-body)}
-.pager a{color:inherit}
+.feed__list{display:flow-root}
+.pager{display:flex;margin:10vw 0 3vw;font-size:var(--fs-body);line-height:1.87}
+.pager>*{flex:1 1 0;min-width:0;display:flex;align-items:center;text-decoration:none;color:inherit}
+.pager a[rel=next]{justify-content:flex-end;text-align:right}
+.pager svg{flex:none;width:9px;height:16px;stroke:currentColor}
+.pager a[rel=next] svg{margin-left:12px}.pager a[rel=prev] svg{margin-right:12px}
 
 /* ---------- post ---------- */
 /* Squarespace blog item: gutter padding, 60% column from 768px, one block per part (17px padding) */
