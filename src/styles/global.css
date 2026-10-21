@@ -18,6 +18,7 @@
 }
 
 @media (min-width:768px){:root{--px:4vw}}
+:root{--gut:6vw}@media (min-width:768px){:root{--gut:4vw}}  /* header gutter: never capped by the 1400px content width */
 @media (min-width:800px){:root{--px:max(4vw,calc((100vw - var(--maxw)) / 2))}}
 
 *,*::before,*::after{box-sizing:border-box}
@@ -39,14 +40,14 @@ p{margin:0}
 .skip:focus{left:var(--px)}
 
 /* ---------- header ---------- */
-.hdr{position:absolute;inset:0 0 auto 0;z-index:30;background:var(--yellow);height:var(--hdr-h);display:flex;align-items:center;padding-inline:var(--px);box-shadow:inset 0 -4px 0 var(--black)}
+.hdr{position:absolute;inset:0 0 auto 0;z-index:30;background:var(--yellow);height:var(--hdr-h);display:flex;align-items:center;padding-inline:var(--gut);box-shadow:inset 0 -4px 0 var(--black)}
 .hdr__logo{display:block;width:var(--logo-w);flex:none}
 .hdr__logo img{width:100%;height:var(--logo-h)}
 .nav{display:none;margin-left:auto}
-.nav ul{display:flex;gap:calc(var(--px) * 1.25);list-style:none;margin:0;padding:0}
+.nav ul{display:flex;gap:calc(var(--gut) * 1.25);list-style:none;margin:0;padding:0}
 .nav a{display:block;text-decoration:none;font-size:var(--fs-body);line-height:1.87;padding:.1em 0;background:linear-gradient(var(--black),var(--black)) 0 calc(100% - .1em)/0 1px no-repeat}
 .nav a[aria-current=page]{background-size:100% 1px}
-.burger{position:absolute;left:var(--px);top:50%;translate:0 -50%;width:47px;height:37px;padding:1px 6px;background:none;border:0;cursor:pointer;color:inherit}
+.burger{position:absolute;left:var(--gut);top:50%;translate:0 -50%;width:47px;height:37px;padding:1px 6px;background:none;border:0;cursor:pointer;color:inherit}
 /* Squarespace burger: 35px box at (6,1); closed = two 35px lines at 11/22px, open = two 28px lines crossed at the box centre */
 .burger span{position:absolute;left:6px;top:12px;width:35px;height:1px;background:currentColor;transition:transform .25s,top .25s,left .25s,width .25s}
 .burger span+span{top:23px}
@@ -60,7 +61,7 @@ p{margin:0}
 body.menu-open{overflow:hidden}
 body.menu-open .hdr{box-shadow:none}
 @media (min-width:800px){
-  .hdr{padding-inline:var(--px)}
+  .hdr{padding-inline:var(--gut)}
   .hdr__logo{margin-inline:0}
   .nav{display:block}
   .burger,.menu{display:none}
@@ -154,7 +155,7 @@ body.t-white{background:#fff}
 
 /* ---------- film page ---------- */
 .hero--text{padding-bottom:var(--hero-pt)}
-.col-994{max-width:994px}
+@media (min-width:768px){.col-994{width:75%}}  /* 9 of 12 columns, left aligned */
 .stack>.gap3{margin-top:calc(var(--rem) * 4 + var(--g))}  /* h1 + empty paragraph + h2 inside one text block */
 .rule{height:calc(var(--fs-body) + 1px);margin-bottom:0;border:0;background:linear-gradient(#000,#000) center/100% 1px no-repeat}  /* Squarespace line block: .5em + 1px + .5em */
 .fig--q941>picture{max-width:min(100%,941px)}.fig--q1024>picture{max-width:min(100%,1024px)}
