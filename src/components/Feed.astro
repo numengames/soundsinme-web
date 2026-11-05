@@ -1,21 +1,21 @@
 ---
 import Pic from './Pic.astro';
-import { fmt, labels, slug, plain } from '../lib/posts';
+import { fmt, slug } from '../lib/posts';
 const { posts, first = true } = Astro.props;
 ---
 <div class="feed__list">
 {posts.map((p, i) => (
   <article class="entry">
-    <a class="entry__img" href={`/blog/${p.slug}`} tabindex="-1" aria-hidden="true">
-      {p.cover && <Pic k={p.cover} alt="" sizes="(min-width:800px) 46vw, 92vw" w={662} h={662} eager={first && i === 0} />}
-    </a>
-    <div class="entry__body">
-      {p.categories.length > 0 && <ul class="tags tags--top">{p.categories.map((t) => <li><a href={`/blog/tag/${slug(t)}`}>{t}</a></li>)}</ul>}
-      <time class="sr" datetime={p.date}>{fmt(p.date)}</time>
+    {p.cover && <a class="entry__img" href={`/blog/${p.slug}`} tabindex="-1" aria-hidden="true"><Pic k={p.cover} alt="" sizes="(min-width:768px) 46vw, 92vw" w={662} h={662} eager={first && i === 0} /></a>}
+    <div class="entry__body"><div class="entry__txt">
+      <div class="entry__meta">
+        {p.categories.length > 0 && <span class="entry__cats">{p.categories.map((t, j) => <>{j > 0 && <span>, </span>}<a href={`/blog/tag/${slug(t)}`}>{t}</a></>)}</span><span aria-hidden="true">•</span>}
+        <time datetime={p.date}>{fmt(p.date)}</time>
+      </div>
       <h2><a href={`/blog/${p.slug}`}>{p.title}</a></h2>
-      {p.excerpt && <p>{p.excerpt}</p>}
-      <a class="more" href={`/blog/${p.slug}`}>Leer más<span class="sr"> sobre {p.title}</span></a>
-    </div>
+      {p.excerptHtml ? <div class="entry__ex" set:html={p.excerptHtml} /> : p.excerpt && <div class="entry__ex"><p>{p.excerpt}</p></div>}
+      <a class="more" href={`/blog/${p.slug}`} aria-label={`Leer más sobre ${p.title}`}>Leer más</a>
+    </div></div>
   </article>
 ))}
 </div>

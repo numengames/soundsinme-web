@@ -11,8 +11,8 @@ const path = page === 1 ? '/blog' : `/blog/page/${page}`;
  ld={[{ '@context': 'https://schema.org', '@type': 'Blog', name: 'Sounds stories', url: 'https://www.soundsinme.com/blog', blogPost: items.slice(0, 10).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: `https://www.soundsinme.com/blog/${p.slug}`, datePublished: p.date })) }]}>
   <section class="feed"><h1 class="sr">Sounds stories</h1><Feed posts={items} />
     <nav class="pager" aria-label="Paginación">
-      {page > 1 ? <a href={page === 2 ? '/blog' : `/blog/page/${page - 1}`} rel="prev">‹ Publicaciones más recientes</a> : <span></span>}
-      {page < pages ? <a href={`/blog/page/${page + 1}`} rel="next">Publicaciones más antiguas ›</a> : <span></span>}
+      {page > 1 ? <a href={page === 2 ? '/blog' : `/blog/page/${page - 1}`} rel="prev"><svg viewBox="0 0 9 16" aria-hidden="true"><polyline fill="none" stroke-miterlimit="10" points="7.4,1.2 2.5,7.9 7.4,14.7" /></svg><span>Publicaciones más recientes</span></a> : <span></span>}
+      {page < pages ? <a href={`/blog/page/${page + 1}`} rel="next"><span>Publicaciones más antiguas</span><svg viewBox="0 0 9 16" aria-hidden="true"><polyline fill="none" stroke-miterlimit="10" points="1.6,1.2 6.5,7.9 1.6,14.7" /></svg></a> : <span></span>}
     </nav>
   </section>
 </Base>
